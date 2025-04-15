@@ -1,0 +1,7 @@
+Iniciando teste do SignExtend...
+=================================
+Tempo    10: in=16'h7fff (Positivo) | out=32'h00007fff
+Tempo    20: in=16'h8000 (Negativo) | out=32'hffff8000
+Tempo    30: in=16'h0000 (Zero)     | out=32'h00000000
+Tempo    40: in=16'hf123 (Negativo) | out=32'hfffff123
+=================================
