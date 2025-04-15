@@ -1,1 +1,7 @@
-
+Iniciando teste do Instruction Memory...
+=================================
+address = 00000000 -> instruction = 2001000a
+address = 00000004 -> instruction = 20020014
+address = 00000008 -> instruction = 20030032
+address = 00000010 -> instruction = 00220820
+=================================
