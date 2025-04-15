@@ -81,7 +81,6 @@ mux2 #(5) MuxRegDst (
 	.y(mux_reg_dst)
 );
 
-
 	// Extensor de Sinal
 	SignExtend SE (
     	.in(instruction[15:0]),
@@ -187,12 +186,7 @@ module instruction_memory (
 );
 
 	reg [31:0] mem [0:63];
-Iniciando Testbench...
-=== Estado dos Registradores ===
-t0 =          4
-s0 =          4
-s1 =         22
-Fim da simulação.
+	
 	initial begin
     	// Manualmente inserindo o conteúdo do program.bin:
   	mem[0] = 32'b00100000000100000000000000000100;
@@ -309,12 +303,8 @@ always @(opcode) begin
     	end
    	 
     	// Instruções imediatas (addi, ori, etc.)
-    	6'b001000: begin  // addiIniciando Testbench...
-=== Estado dos Registradores ===
-t0 =          4
-s0 =          4
-s1 =         22
-Fim da simulação.
+    	6'b001000: begin  // addi
+		
         	RegDst = 1'b0;
         	ALUSrc = 1'b1;
         	MemtoReg = 1'b0;
@@ -355,12 +345,7 @@ module ArithmeticLogicUnit (
 	input [31:0] InputB,
 	input [3:0] Operation,
 	output reg [31:0] Result,
-	output reg IsZeroIniciando Testbench...
-=== Estado dos Registradores ===
-t0 =          4
-s0 =          4
-s1 =         22
-Fim da simulação.
+	output reg IsZero
 );
 	always @(*) begin
     	Result = 32'b0; // Default value
@@ -416,12 +401,7 @@ module DataMemory (
 );
 
 	// Memória com 1024 posições de 32 bits (4 KB de memória)
-	reg [31:0] memory [0:63];Iniciando Testbench...
-=== Estado dos Registradores ===
-t0 =          4
-s0 =          4
-s1 =         22
-Fim da simulação.
+	reg [31:0] memory [0:63];
 
 	// Leitura (combinacional)
 	always @(*) begin
