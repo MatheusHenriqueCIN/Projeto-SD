@@ -1,65 +1,76 @@
-TESTBENCH
-
 `timescale 1ns / 1ps
 
-module tb_OperationSelector;
-
-	// Entradas
-	reg [1:0] Mode;
-	reg [5:0] InstructionFunct;
-
-	// Saída
-	wire [3:0] OpCode;
-
-	// Instanciação do módulo
-	OperationSelector uut (
-    	.Mode(Mode),
-    	.InstructionFunct(InstructionFunct),
-    	.OpCode(OpCode)
-	);
-
-	// Procedimento de teste
-	initial begin
-    	$display("Time | Mode | Funct   | OpCode");
-    	$display("------------------------------");
-
-    	// Teste 1: Mode 00 (Add)
-    	Mode = 2'b00; InstructionFunct = 6'bxxxxxx; #10;
-    	$display("%4dns | %b  | %b | %b", $time, Mode, InstructionFunct, OpCode);
-
-    	// Teste 2: Mode 01 (Subtract)
-    	Mode = 2'b01; InstructionFunct = 6'bxxxxxx; #10;
-    	$display("%4dns | %b  | %b | %b", $time, Mode, InstructionFunct, OpCode);
-
-    	// Teste 3: Mode 10 - Funct = 100000 (Add)
-    	Mode = 2'b10; InstructionFunct = 6'b100000; #10;
-    	$display("%4dns | %b  | %b | %b", $time, Mode, InstructionFunct, OpCode);
-
-    	// Teste 4: Mode 10 - Funct = 100010 (Subtract)
-    	Mode = 2'b10; InstructionFunct = 6'b100010; #10;
-    	$display("%4dns | %b  | %b | %b", $time, Mode, InstructionFunct, OpCode);
-
-    	// Teste 5: Mode 10 - Funct = 100100 (AND)
-    	Mode = 2'b10; InstructionFunct = 6'b100100; #10;
-    	$display("%4dns | %b  | %b | %b", $time, Mode, InstructionFunct, OpCode);
-
-    	// Teste 6: Mode 10 - Funct = 100101 (OR)
-    	Mode = 2'b10; InstructionFunct = 6'b100101; #10;
-    	$display("%4dns | %b  | %b | %b", $time, Mode, InstructionFunct, OpCode);
-
-    	// Teste 7: Mode 10 - Funct = 101010 (SLT)
-    	Mode = 2'b10; InstructionFunct = 6'b101010; #10;
-    	$display("%4dns | %b  | %b | %b", $time, Mode, InstructionFunct, OpCode);
-
-    	// Teste 8: Mode 10 - Funct inválido
-    	Mode = 2'b10; InstructionFunct = 6'b111111; #10;
-    	$display("%4dns | %b  | %b | %b", $time, Mode, InstructionFunct, OpCode);
-
-    	// Teste 9: Mode inválido
-    	Mode = 2'b11; InstructionFunct = 6'b100000; #10;
-    	$display("%4dns | %b  | %b | %b", $time, Mode, InstructionFunct, OpCode);
-
-    	$finish;
-	end
-
+module OperationSelector_TB;
+    // Inputs
+    reg [1:0] Mode;
+    reg [5:0] InstructionFunct;
+    
+    // Outputs
+    wire [3:0] OpCode;
+    
+    // Instantiate the Unit Under Test (UUT)
+    OperationSelector uut (
+        .Mode(Mode),
+        .InstructionFunct(InstructionFunct),
+        .OpCode(OpCode)
+    );
+    
+    initial begin
+        // Initialize Inputs
+        Mode = 0;
+        InstructionFunct = 0;
+        
+        // Wait 100 ns for global reset to finish
+        #100;
+        
+        $display("Iniciando teste da ALU...");
+        $display("=================================");
+        
+        // Test ADD operation
+        Mode = 2'b00;
+        #10;
+        $display("ADD: Modo 00 selecionado, OpCode = %b (esperado: 0010)", OpCode);
+        
+        // Test SUB operation
+        Mode = 2'b01;
+        #10;
+        $display("SUB: Modo 01 selecionado, OpCode = %b (esperado: 0110)", OpCode);
+        
+        // Test R-type instructions
+        Mode = 2'b10;
+        
+        // Test ADD funct
+        InstructionFunct = 6'b100000;
+        #10;
+        $display("ADD (funct): Funct 100000 selecionado, OpCode = %b (esperado: 0010)", OpCode);
+        
+        // Test SUB funct
+        InstructionFunct = 6'b100010;
+        #10;
+        $display("SUB (funct): Funct 100010 selecionado, OpCode = %b (esperado: 0110)", OpCode);
+        
+        // Test AND funct
+        InstructionFunct = 6'b100100;
+        #10;
+        $display("AND (funct): Funct 100100 selecionado, OpCode = %b (esperado: 0000)", OpCode);
+        
+        // Test OR funct
+        InstructionFunct = 6'b100101;
+        #10;
+        $display("OR (funct): Funct 100101 selecionado, OpCode = %b (esperado: 0001)", OpCode);
+        
+        // Test SLT funct
+        InstructionFunct = 6'b101010;
+        #10;
+        $display("SLT (funct): Funct 101010 selecionado, OpCode = %b (esperado: 0111)", OpCode);
+        
+        // Test invalid operation
+        Mode = 2'b11;
+        #10;
+        $display("Operação inválida: Modo 11 selecionado, OpCode = %b (esperado: 1111)", OpCode);
+        
+        $display("=================================");
+        $display("Teste da ALU concluído com sucesso!");
+        $finish;
+    end
 endmodule
