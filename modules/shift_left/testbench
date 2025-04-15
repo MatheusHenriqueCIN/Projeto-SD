@@ -1,0 +1,40 @@
+`timescale 1ns / 1ps
+
+module shiftleft_tb;
+    logic [31:0] a, y;
+
+    // Instância do módulo shiftleft
+    shiftleft uut (
+        .a(a),
+        .y(y)
+    );
+
+    initial begin
+        $display("Iniciando teste do Shift Left (<< 2)...");
+        $display("=========================================");
+        
+        // Teste 1: Deslocamento de 0x00000001 (1 → 4)
+        a = 32'h00000001;
+        #10;
+        $display("Tempo %5d: a=32'h%8h | y=32'h%8h (1 << 2 = 4)", $time, a, y);
+
+        // Teste 2: Deslocamento de 0x00000010 (16 → 64)
+        a = 32'h00000010;
+        #10;
+        $display("Tempo %5d: a=32'h%8h | y=32'h%8h (16 << 2 = 64)", $time, a, y);
+
+        // Teste 3: Deslocamento de 0x10000000 (268435456 → 1073741824)
+        a = 32'h10000000;
+        #10;
+        $display("Tempo %5d: a=32'h%8h | y=32'h%8h (268435456 << 2 = 1073741824)", $time, a, y);
+
+        // Teste 4: Deslocamento de 0xFFFFFFFF (-1 → -4) (complemento de 2)
+        a = 32'hFFFFFFFF;
+        #10;
+        $display("Tempo %5d: a=32'h%8h | y=32'h%8h (-1 << 2 = -4)", $time, a, y);
+
+        $display("=========================================");
+        $display("Teste do Shift Left concluído com sucesso!");
+        $finish;
+    end
+endmodule
