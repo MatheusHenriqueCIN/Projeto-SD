@@ -1,1 +1,9 @@
-
+Iniciando teste do ProgramCounter...
+=================================
+PC = 00000000 -> Reset -> PC = 00000000
+PC = 00000004 -> PC_next = 00000004 -> PC = 00000004
+PC = 00000008 -> PC_next = 00000008 -> PC = 00000008
+PC = 00000008 -> PC_next = 00000000 (enable=0) -> PC = 00000008
+PC = 00000000 -> Reset -> PC = 00000000
+=================================
+Teste do ProgramCounter concluído com sucesso!
