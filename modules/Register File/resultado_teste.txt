@@ -1,1 +1,8 @@
-
+Iniciando teste do Register File...
+=================================
+R[5] = a5a5a5a5, R[0] = 00000000
+R[10] = 12345678, R[0] = 00000000
+R[0] = 00000000, R[5] = a5a5a5a5
+R[15] = 5555aaaa, R[10] = 12345678
+=================================
+Teste do Register File concluído com sucesso!
