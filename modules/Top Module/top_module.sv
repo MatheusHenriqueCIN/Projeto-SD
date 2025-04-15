@@ -189,7 +189,7 @@ module instruction_memory (
 	
 	initial begin
     	// Manualmente inserindo o conteúdo do program.bin:
-  	mem[0] = 32'b00100000000100000000000000000100; //addi $s0, $0, 4 
+    mem[0] = 32'b00100000000100000000000000000100; //addi $s0, $0, 4 
   	mem[1] = 32'b00100000000010000000000000000001; //addi $t0, $0, 1 
   	mem[2] = 32'b00100000000100010000000000000000; //addi $s1, $0, $0
   	mem[3] = 32'b00010010000010000000000000001010; //beq $s0, $t0, done
