@@ -1,6 +1,3 @@
-
-
-
 // Testbench
 module ControlUnit_tb;
 
@@ -31,40 +28,48 @@ module ControlUnit_tb;
     );
     
     initial begin
-        // Inicializa as entradas
-        opcode = 0;
-        
-        // Monitoramento dos sinais
-        $monitor("Tempo %t: opcode=%b | RegDst=%b, Branch=%b, MemRead=%b, MemtoReg=%b, ALUOp=%b, MemWrite=%b, ALUSrc=%b, RegWrite=%b",
-                 $time, opcode, RegDst, Branch, MemRead, MemtoReg, ALUOp, MemWrite, ALUSrc, RegWrite);
+        $display("Iniciando teste da Control Unit...");
+        $display("=================================");
         
         // Test case 1: R-type instruction
-        #10 opcode = 6'b000000;  // Tipo R
+        opcode = 6'b000000;  // Tipo R
         #10;
+        $display("Tempo %t: Opcode=%b (R-type) | RegDst=%b, Branch=%b, MemRead=%b, MemtoReg=%b, ALUOp=%b, MemWrite=%b, ALUSrc=%b, RegWrite=%b",
+                 $time, opcode, RegDst, Branch, MemRead, MemtoReg, ALUOp, MemWrite, ALUSrc, RegWrite);
         
         // Test case 2: lw instruction
-        #10 opcode = 6'b100011;  // lw
+        opcode = 6'b100011;  // lw
         #10;
+        $display("Tempo %t: Opcode=%b (lw)     | RegDst=%b, Branch=%b, MemRead=%b, MemtoReg=%b, ALUOp=%b, MemWrite=%b, ALUSrc=%b, RegWrite=%b",
+                 $time, opcode, RegDst, Branch, MemRead, MemtoReg, ALUOp, MemWrite, ALUSrc, RegWrite);
         
         // Test case 3: sw instruction
-        #10 opcode = 6'b101011;  // sw
+        opcode = 6'b101011;  // sw
         #10;
+        $display("Tempo %t: Opcode=%b (sw)     | RegDst=%b, Branch=%b, MemRead=%b, MemtoReg=%b, ALUOp=%b, MemWrite=%b, ALUSrc=%b, RegWrite=%b",
+                 $time, opcode, RegDst, Branch, MemRead, MemtoReg, ALUOp, MemWrite, ALUSrc, RegWrite);
         
         // Test case 4: beq instruction
-        #10 opcode = 6'b000100;  // beq
+        opcode = 6'b000100;  // beq
         #10;
+        $display("Tempo %t: Opcode=%b (beq)    | RegDst=%b, Branch=%b, MemRead=%b, MemtoReg=%b, ALUOp=%b, MemWrite=%b, ALUSrc=%b, RegWrite=%b",
+                 $time, opcode, RegDst, Branch, MemRead, MemtoReg, ALUOp, MemWrite, ALUSrc, RegWrite);
         
         // Test case 5: addi instruction
-        #10 opcode = 6'b001000;  // addi
+        opcode = 6'b001000;  // addi
         #10;
+        $display("Tempo %t: Opcode=%b (addi)   | RegDst=%b, Branch=%b, MemRead=%b, MemtoReg=%b, ALUOp=%b, MemWrite=%b, ALUSrc=%b, RegWrite=%b",
+                 $time, opcode, RegDst, Branch, MemRead, MemtoReg, ALUOp, MemWrite, ALUSrc, RegWrite);
         
         // Test case 6: Invalid opcode
-        #10 opcode = 6'b111111;  // Inválido
+        opcode = 6'b111111;  // Inválido
         #10;
+        $display("Tempo %t: Opcode=%b (inválido)| RegDst=%b, Branch=%b, MemRead=%b, MemtoReg=%b, ALUOp=%b, MemWrite=%b, ALUSrc=%b, RegWrite=%b",
+                 $time, opcode, RegDst, Branch, MemRead, MemtoReg, ALUOp, MemWrite, ALUSrc, RegWrite);
         
-        $display("Testes concluídos!");
+        $display("=================================");
+        $display("Teste da Control Unit concluído com sucesso!");
         $finish;
     end
     
 endmodule
-
