@@ -1,0 +1,42 @@
+`timescale 1ns / 1ps
+
+module SignExtend_tb;
+    reg [15:0] in;      // Entrada de 16 bits
+    wire [31:0] out;    // Saída de 32 bits estendida
+
+    // Instância do módulo SignExtend
+    SignExtend uut (
+        .in(in),
+        .out(out)
+    );
+
+    // Inicialização
+    initial begin
+        $display("Iniciando teste do SignExtend...");
+        $display("=================================");
+        
+        // Teste 1: Número positivo (extensão com zeros)
+        in = 16'h7FFF;  // 32767 em decimal (positivo)
+        #10;
+        $display("Tempo %5d: in=16'h%4h (Positivo) | out=32'h%8h", $time, in, out);
+
+        // Teste 2: Número negativo (extensão com uns)
+        in = 16'h8000;  // -32768 em decimal (negativo)
+        #10;
+        $display("Tempo %5d: in=16'h%4h (Negativo) | out=32'h%8h", $time, in, out);
+
+        // Teste 3: Zero
+        in = 16'h0000;
+        #10;
+        $display("Tempo %5d: in=16'h%4h (Zero)     | out=32'h%8h", $time, in, out);
+
+        // Teste 4: Valor aleatório (extensão de sinal)
+        in = 16'hF123;  // Número negativo (bit 15 = 1)
+        #10;
+        $display("Tempo %5d: in=16'h%4h (Negativo) | out=32'h%8h", $time, in, out);
+
+        $display("=================================");
+        $display("Teste do SignExtend concluído com sucesso!");
+        $finish;
+    end
+endmodule
