@@ -1,0 +1,12 @@
+Iniciando teste da ALU...
+=================================
+ADD: Modo 00 selecionado, OpCode = 0010 (esperado: 0010)
+SUB: Modo 01 selecionado, OpCode = 0110 (esperado: 0110)
+ADD (funct): Funct 100000 selecionado, OpCode = 0010 (esperado: 0010)
+SUB (funct): Funct 100010 selecionado, OpCode = 0110 (esperado: 0110)
+AND (funct): Funct 100100 selecionado, OpCode = 0000 (esperado: 0000)
+OR (funct): Funct 100101 selecionado, OpCode = 0001 (esperado: 0001)
+SLT (funct): Funct 101010 selecionado, OpCode = 0111 (esperado: 0111)
+Operação inválida: Modo 11 selecionado, OpCode = 1111 (esperado: 1111)
+=================================
+Teste da ALU concluído com sucesso!
