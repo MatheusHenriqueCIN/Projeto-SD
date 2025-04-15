@@ -1,6 +1,14 @@
 Iniciando Testbench...
-=== Estado dos Registradores ===
-t0 =          4
-s0 =          4
-s1 =         22
+Monitorando mudanças no registrador $t0 (registrador 8)
+======================================================
+Clock 2: $t0 mudou de 0xxxxxxxxx (x) para 0x00000001 (1)
+Clock 5: $t0 mudou de 0x00000001 (1) para 0x00000002 (2)
+Clock 8: $t0 mudou de 0x00000002 (2) para 0x00000003 (3)
+Clock 11: $t0 mudou de 0x00000003 (3) para 0x00000004 (4)
+======================================================
+Estado final dos registradores:
+$s0 (r16) = 4 (0x00000004)
+$t0 (r8) = 4 (0x00000004)
+$s1 (r17) = 22 (0x00000016)
+Total de ciclos de clock: 50
 Fim da simulação.
