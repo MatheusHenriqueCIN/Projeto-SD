@@ -1,7 +1,18 @@
 Iniciando teste do Instruction Memory...
 =================================
-address = 00000000 -> instruction = 2001000a
-address = 00000004 -> instruction = 20020014
-address = 00000008 -> instruction = 20030032
-address = 00000010 -> instruction = 00220820
+Endereço: 00000000 | Instrução: 00100000000100000000000000000100 (addi $s0, $0, 4)
+Endereço: 00000004 | Instrução: 00100000000010000000000000000001 (addi $t0, $0, 1)
+Endereço: 00000008 | Instrução: 00100000000100010000000000000000 (addi $s1, $0, $0)
+Endereço: 0000000c | Instrução: 00010010000010000000000000001010 (beq $s0, $t0, done)
+Endereço: 00000010 | Instrução: 00100000000010000000000000000010 (addi $t0, $0, 2)
+Endereço: 00000014 | Instrução: 00100000000100010000000000001000 (addi $s1, $0, 8)
+Endereço: 00000018 | Instrução: 00010010000010000000000000000111 (beq $s0, $t0, done)
+Endereço: 0000001c | Instrução: 00100000000010000000000000000011 (addi $t0, $0, 3)
+Endereço: 00000020 | Instrução: 00100000000100010000000000001111 (addi $s1, $0, 15)
+Endereço: 00000024 | Instrução: 00010010000010000000000000000100 (beq $s0, $t0, done)
+Endereço: 00000028 | Instrução: 00100000000010000000000000000100 (addi $t0, $0, 4)
+Endereço: 0000002c | Instrução: 00100000000100010000000000010110 (addi $s1, $0, 22)
+Endereço: 00000030 | Instrução: 00010010000010000000000000000001 (beq $s0, $t0, done)
+Endereço: 00000034 | Instrução: 00100000000100010000000000011100 (addi $s1, $0, 28)
 =================================
+Teste concluído com sucesso!
