@@ -1,1 +1,9 @@
+module PCBranch (
+	input wire [31:0] pc_plus_4,    	// PC + 4
+	input wire [31:0] imm_ext,      	// Imediato estendido (sign extend)
+	output wire [31:0] pc_branch_out	// Endereço alvo do branch
+);
 
+	assign pc_branch_out = pc_plus_4 + (imm_ext << 2);  // Desloca e soma
+
+endmodule
