@@ -1,0 +1,47 @@
+`timescale 1ns / 1ps  // Define a escala de tempo para simulação
+
+module pcadder4_tb;
+    // Sinais de estímulo e monitoramento
+    logic [31:0] pc;  // Valor do PC de entrada
+    logic [31:0] y;   // Valor de saída (PC + 4)
+
+    // Instanciação do módulo sob teste (Unit Under Test - UUT)
+    pcadder4 uut (
+        .pc(pc),
+        .y(y)
+    );
+
+    // Bloco inicial para os testes
+    initial begin
+        $display("Iniciando teste do PC Adder...");
+        $display("=================================");
+        
+        // Teste 1: PC inicial (0x00000000)
+        pc = 32'h00000000;
+        #10;
+        $display("PC = %h -> PC + 4 = %h", pc, y);
+        if (y !== 32'h00000004) $error("Erro no Teste 1!");
+        
+        // Teste 2: PC incrementado (0x00000004)
+        pc = 32'h00000004;
+        #10;
+        $display("PC = %h -> PC + 4 = %h", pc, y);
+        if (y !== 32'h00000008) $error("Erro no Teste 2!");
+        
+        // Teste 3: Valor grande de PC (0x10000000)
+        pc = 32'h10000000;
+        #10;
+        $display("PC = %h -> PC + 4 = %h", pc, y);
+        if (y !== 32'h10000004) $error("Erro no Teste 3!");
+        
+        // Teste 4: Valor com overflow (0xFFFFFFFC)
+        pc = 32'hFFFFFFFC;
+        #10;
+        $display("PC = %h -> PC + 4 = %h", pc, y);
+        if (y !== 32'h00000000) $error("Erro no Teste 4!");
+        
+        $display("=================================");
+        $display("Teste do PC Adder concluído com sucesso!");
+        $finish;  // Finaliza a simulação
+    end
+endmodule

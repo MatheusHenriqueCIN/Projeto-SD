@@ -1,0 +1,8 @@
+// Módulo que incrementa o contador de programa (PC) em 4 unidades
+module pcadder4 (
+    input  logic [31:0] pc,    // Entrada de 32 bits com o valor atual do PC
+    output logic [31:0] y      // Saída de 32 bits com PC + 4
+);
+    // Lógica combinacional para somar 4 ao PC
+    assign y = pc + 4;
+endmodule

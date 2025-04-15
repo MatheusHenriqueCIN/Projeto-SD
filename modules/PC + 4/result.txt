@@ -1,0 +1,8 @@
+Iniciando teste do PC Adder...
+=================================
+PC = 00000000 -> PC + 4 = 00000004
+PC = 00000004 -> PC + 4 = 00000008
+PC = 10000000 -> PC + 4 = 10000004
+PC = fffffffc -> PC + 4 = 00000000
+=================================
+Teste do PC Adder concluído com sucesso!
