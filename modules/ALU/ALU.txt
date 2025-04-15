@@ -1,0 +1,26 @@
+`timescale 1ns / 1ps
+
+// Módulo ALU com todas operações básicas do MIPS
+module ArithmeticLogicUnit (
+    input      [31:0] InputA,     // Operando A
+    input      [31:0] InputB,     // Operando B
+    input      [3:0]  Operation,  // Código da operação
+    output reg [31:0] Result,     // Resultado da operação
+    output reg       IsZero      // Flag de resultado zero
+);
+    // Lógica combinacional para todas operações
+    always @(*) begin
+        case (Operation)
+            4'b0010: Result = InputA + InputB;  // ADD
+            4'b0110: Result = InputA - InputB;  // SUB
+            4'b0000: Result = InputA & InputB;  // AND
+            4'b0001: Result = InputA | InputB;  // OR
+            4'b0111: Result = (InputA < InputB) ? 32'b1 : 32'b0; // SLT
+            4'b1100: Result = ~(InputA | InputB); // NOR
+            default: Result = 32'b0;            // Operação inválida
+        endcase
+        
+        IsZero = (Result == 32'b0);  // Atualiza flag Zero
+    end
+    
+endmodule

@@ -1,0 +1,102 @@
+`timescale 1ns / 1ps
+
+module ALU_tb;
+    // =============================================
+    // Declaração de sinais
+    // =============================================
+    reg  [31:0] InputA;
+    reg  [31:0] InputB;
+    reg  [3:0]  Operation;
+    wire [31:0] Result;
+    wire        IsZero;
+
+    // =============================================
+    // Instanciação da ALU (Unit Under Test)
+    // =============================================
+    ArithmeticLogicUnit uut (
+        .InputA(InputA),
+        .InputB(InputB),
+        .Operation(Operation),
+        .Result(Result),
+        .IsZero(IsZero)
+    );
+
+    // =============================================
+    // Procedimento de teste
+    // =============================================
+    initial begin
+        $display("\nIniciando teste da ALU...");
+        $display("=================================");
+        
+        // -----------------------------------------
+        // Teste 1: Operação ADD (4'b0010)
+        // -----------------------------------------
+        InputA = 32'd25;
+        InputB = 32'd10;
+        Operation = 4'b0010;
+        #10;
+        $display("ADD: %d + %d = %d (Zero=%b)", InputA, InputB, Result, IsZero);
+        if (Result !== 32'd35) $error("Erro no ADD!");
+        
+        // -----------------------------------------
+        // Teste 2: Operação SUB (4'b0110)
+        // -----------------------------------------
+        InputA = 32'd50;
+        InputB = 32'd25;
+        Operation = 4'b0110;
+        #10;
+        $display("SUB: %d - %d = %d (Zero=%b)", InputA, InputB, Result, IsZero);
+        if (Result !== 32'd25) $error("Erro no SUB!");
+        
+        // -----------------------------------------
+        // Teste 3: Operação AND (4'b0000)
+        // -----------------------------------------
+        InputA = 32'b10101010_10101010_10101010_10101010;
+        InputB = 32'b11001100_11001100_11001100_11001100;
+        Operation = 4'b0000;
+        #10;
+        $display("AND: %b & %b = %b", InputA, InputB, Result);
+        if (Result !== 32'b10001000_10001000_10001000_10001000) $error("Erro no AND!");
+        
+        // -----------------------------------------
+        // Teste 4: Operação OR (4'b0001)
+        // -----------------------------------------
+        InputA = 32'b10101010_10101010_10101010_10101010;
+        InputB = 32'b01010101_01010101_01010101_01010101;
+        Operation = 4'b0001;
+        #10;
+        $display("OR:  %b | %b = %b", InputA, InputB, Result);
+        if (Result !== 32'b11111111_11111111_11111111_11111111) $error("Erro no OR!");
+        
+        // -----------------------------------------
+        // Teste 5: Operação SLT (4'b0111)
+        // -----------------------------------------
+        InputA = 32'd10;
+        InputB = 32'd20;
+        Operation = 4'b0111;
+        #10;
+        $display("SLT: %d < %d? %d (Zero=%b)", InputA, InputB, Result, IsZero);
+        if (Result !== 32'd1) $error("Erro no SLT (caso A < B)!");
+        
+        InputA = 32'd30;
+        InputB = 32'd15;
+        Operation = 4'b0111;
+        #10;
+        $display("SLT: %d < %d? %d (Zero=%b)", InputA, InputB, Result, IsZero);
+        if (Result !== 32'd0) $error("Erro no SLT (caso A > B)!");
+        
+        // -----------------------------------------
+        // Teste 6: Operação NOR (4'b1100)
+        // -----------------------------------------
+        InputA = 32'b10101010_10101010_10101010_10101010;
+        InputB = 32'b01010101_01010101_01010101_01010101;
+        Operation = 4'b1100;
+        #10;
+        $display("NOR: %b ~| %b = %b", InputA, InputB, Result);
+        if (Result !== 32'b00000000_00000000_00000000_00000000) $error("Erro no NOR!");
+        
+        $display("=================================");
+        $display("Teste da ALU concluído com sucesso!");
+        $finish;
+    end
+endmodule
