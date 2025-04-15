@@ -1,19 +1,30 @@
 module instruction_memory (
-    input wire [31:0] address,
-    output reg [31:0] instruction
+	input [31:0] address,
+	output reg [31:0] instruction
 );
-    reg [31:0] mem [0:63];
-    initial begin
-        mem[0] = 32'h2001000A;  // addi $1, $0, 10
-        mem[1] = 32'h20020014;  // addi $2, $0, 20
-        mem[2] = 32'h20030032;  // addi $3, $0, 50
-        mem[3] = 32'hAC010000;  // sw $1, 0($0)
-        mem[4] = 32'h00220820;  // add $1, $1, $2
-        mem[5] = 32'h10230002;  // beq $1, $3, 2
-        mem[6] = 32'h1000FFFD;  // beq $0, $0, -3
-        mem[7] = 32'h00000000;  // nop
-    end
-    always @(address) begin
-        instruction = mem[address >> 2];
-    end
+
+	reg [31:0] mem [0:63];
+
+	initial begin
+    	// Manualmente inserindo o conteúdo do program.bin:
+  	mem[0] = 32'b00100000000100000000000000000100; //addi $s0, $0, 4 
+  	mem[1] = 32'b00100000000010000000000000000001; //addi $t0, $0, 1 
+  	mem[2] = 32'b00100000000100010000000000000000; //addi $s1, $0, $0
+  	mem[3] = 32'b00010010000010000000000000001010; //beq $s0, $t0, done
+  	mem[4] = 32'b00100000000010000000000000000010; //addi $t0, $0, 2
+  	mem[5] = 32'b00100000000100010000000000001000; //addi $s1, $0, 8
+  	mem[6] = 32'b00010010000010000000000000000111; //beq $s0, $t0, done
+  	mem[7] = 32'b00100000000010000000000000000011; //addi $t0, $0, 3
+  	mem[8] = 32'b00100000000100010000000000001111; //addi $s1, $0, 15
+  	mem[9] = 32'b00010010000010000000000000000100; //beq $s0, $t0, done
+  	mem[10] = 32'b00100000000010000000000000000100; //addi $t0, $0, 4
+  	mem[11] = 32'b00100000000100010000000000010110; //addi $s1, $0, 22
+  	mem[12] = 32'b00010010000010000000000000000001; //beq $s0, $t0, done  
+  	mem[13] = 32'b00100000000100010000000000011100; //addi $s1, $0, 28
+
+	end
+
+	always @(*) begin
+    	instruction = mem[address >> 2];
+	end
 endmodule
