@@ -1,0 +1,48 @@
+`timescale 1ns / 1ps
+
+module mux2_tb;
+    logic [7:0] d0, d1, y;
+    logic s;
+
+    // Instância do módulo mux2
+    mux2 my_mux (
+        .d0(d0),
+        .d1(d1),
+        .s(s),
+        .y(y)
+    );
+
+    initial begin
+        $display("Iniciando teste do MUX 2:1...");
+        $display("=========================================");
+        
+        // Configuração inicial
+        d0 = 8'hAA;  // 0xAA = 10101010
+        d1 = 8'h55;  // 0x55 = 01010101
+
+        // Teste 1: s=0 (y = d0)
+        s = 0;
+        #10;
+        $display("Tempo %5d: s=%b | d0=%h, d1=%h -> y=%h (Esperado: y=d0=%h)", $time, s, d0, d1, y, d0);
+
+        // Teste 2: s=1 (y = d1)
+        s = 1;
+        #10;
+        $display("Tempo %5d: s=%b | d0=%h, d1=%h -> y=%h (Esperado: y=d1=%h)", $time, s, d0, d1, y, d1);
+
+        // Teste 3: Valores alternados
+        d0 = 8'h0F;
+        d1 = 8'hF0;
+        s = 0;
+        #10;
+        $display("Tempo %5d: s=%b | d0=%h, d1=%h -> y=%h (Esperado: y=d0=%h)", $time, s, d0, d1, y, d0);
+
+        s = 1;
+        #10;
+        $display("Tempo %5d: s=%b | d0=%h, d1=%h -> y=%h (Esperado: y=d1=%h)", $time, s, d0, d1, y, d1);
+
+        $display("=========================================");
+        $display("Teste do MUX 2:1 concluído com sucesso!");
+        $finish;
+    end
+endmodule
