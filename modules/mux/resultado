@@ -1,0 +1,7 @@
+Iniciando teste do MUX 2:1...
+=========================================
+Tempo    10: s=0 | d0=aa, d1=55 -> y=aa (Esperado: y=d0=aa)
+Tempo    20: s=1 | d0=aa, d1=55 -> y=55 (Esperado: y=d1=55)
+Tempo    30: s=0 | d0=0f, d1=f0 -> y=0f (Esperado: y=d0=0f)
+Tempo    40: s=1 | d0=0f, d1=f0 -> y=f0 (Esperado: y=d1=f0)
+=========================================
